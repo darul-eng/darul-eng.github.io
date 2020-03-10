@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kalkulator</title>
     <link rel="stylesheet" href="css_kalkulator.css">
+    <link rel="shortcut icon" href="profil.jpg">
 </head>
 <body>
     <form action="" id="form">
+        <a href="index.html"><img id="icon" src="home.png" alt="home" width="50px" height="50px"></a>
         <div class="input">
             <p>Angka-1:<input type="text" id="numb1"></p>
             <p>Angka-2:<input type="text" id="numb2"></p>
@@ -88,7 +90,7 @@
             if(array.length % 2){
                 return array[half];
             }
-            document.getElementById("outmed").innerHTML = "Nilai Median   = " + array[half-1];
+            document.getElementById("outmed").innerHTML = "Nilai Median = " + array[half-1];
             // console.log(array[half-1]);
         }
         // console.log(median());
