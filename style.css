@@ -15,11 +15,11 @@ h1{
     text-align: center;
 }
 .container{
-    width: 80%;
+    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
-#caption{
+#isi{
     background-color: grey   ;
     padding: 20px;
     font-size: 20px;
