@@ -17,35 +17,9 @@
     <meta property="og:url" content="https://nutrifeed.co.id/">
     <meta property="og:title" content="NutriFeed - Kalkulator Formulasi Pakan Ternak Modern">
     <meta property="og:description" content="Optimalkan gizi ternak Anda dengan kalkulator interaktif berbasis metode Pearson Square.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1516467508483-a72121e905c5?auto=format&fit=crop&w=1200&q=80">
 
-    <!-- TWITTER CARD SEO -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="NutriFeed - Solusi Pakan Ternak Presisi">
-    <meta name="twitter:description" content="Hitung formulasi pakan ternak mandiri berbasis bioteknologi dan metode sains modern.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=800&q=80">
-
-    <!-- STRUCTURED DATA (JSON-LD) FOR SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "NutriFeed Smart Feed Calculator",
-      "alternateName": "Kalkulator Nutrisi Pakan NutriFeed",
-      "description": "Alat interaktif berbasis web untuk merancang dan menghitung formulasi pakan ternak modern secara presisi menggunakan Metode Pearson Square.",
-      "url": "https://nutrifeed.co.id",
-      "applicationCategory": "BusinessApplication",
-      "operatingSystem": "All",
-      "browserRequirements": "Requires JavaScript. Requires HTML5.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "IDR"
-      }
-    }
-    </script>
-
-    <!-- Tailwind CSS CDN -->
+    <!-- TAILWIND CSS & FONTS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -56,1102 +30,410 @@
                         primary: {
                             50: '#f0fdf4',
                             100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
                             500: '#22c55e',
                             600: '#16a34a',
                             700: '#15803d',
                             800: '#166534',
-                        },
-                        secondary: {
-                            50: '#fffbeb',
-                            500: '#f59e0b',
-                            600: '#d97706',
+                            900: '#14532d',
+                            950: '#052e16',
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- LIBRARIES -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-        }
-        /* Custom hide scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased transition-colors duration-300 dark:bg-slate-900 dark:text-slate-100">
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
 
-    <!-- TOP NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90 transition-all">
-        <div class="mx-auto flex max-w-7xl items-center justify-between p-4 md:px-6">
-            <!-- Logo -->
-            <a href="#" class="flex items-center gap-2.5" aria-label="NutriFeed Home">
-                <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 text-white shadow-md shadow-primary-500/20">
-                    <i class="fa-solid fa-wheat-awn text-lg"></i>
+    <!-- NAVBAR -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center gap-2">
+                    <div class="bg-primary-600 text-white p-2 rounded-xl shadow-md shadow-primary-500/20">
+                        <i class="fa-solid fa-wheat-awn text-lg"></i>
+                    </div>
+                    <span class="text-xl font-extrabold tracking-tight bg-gradient-to-r from-primary-600 to-emerald-500 bg-clip-text text-transparent">NutriFeed</span>
                 </div>
-                <div>
-                    <span class="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">Nutri<span class="text-primary-600">Feed</span></span>
-                    <span class="block text-[10px] font-medium tracking-wider text-slate-400 uppercase">Smart Agriculture</span>
+
+                <!-- Nav Menu (Menu Edukasi Telah Dihapus) -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#fitur" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all">Fitur Utama</a>
+                    <a href="#kalkulator" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all">Kalkulator Formulasi</a>
+                    <a href="#analisis" class="text-sm font-semibold text-slate-600 dark:text-slate-300 hover:text-primary-600 dark:hover:text-primary-400 transition-all">Hasil Analisis</a>
                 </div>
-            </a>
 
-            <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600 dark:text-slate-300">
-                <a href="#beranda" class="hover:text-primary-600 transition-colors">Beranda</a>
-                <a href="#teknologi" class="hover:text-primary-600 transition-colors">Teknologi</a>
-                <a href="#kalkulator" class="hover:text-primary-600 transition-colors">Kalkulator Pakan</a>
-                <a href="#produk" class="hover:text-primary-600 transition-colors">Formulasi</a>
-                <a href="#edukasi" class="hover:text-primary-600 transition-colors">Edukasi</a>
-            </nav>
-
-            <!-- Actions -->
-            <div class="flex items-center gap-3">
-                <!-- Dark Mode Toggle -->
-                <button id="theme-toggle" class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors" aria-label="Toggle Theme">
-                    <i id="theme-icon" class="fa-solid fa-moon"></i>
-                </button>
-
-                <!-- CTA Button (Desktop) -->
-                <a href="#kalkulator" class="hidden md:inline-flex items-center gap-2 rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700 active:scale-95 transition-all shadow-lg shadow-primary-600/15">
-                    Mulai Formulasi <i class="fa-solid fa-calculator"></i>
-                </a>
-
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-btn" class="flex h-10 w-10 items-center justify-center rounded-lg border border-slate-200 bg-slate-50 text-slate-600 hover:bg-slate-100 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800 md:hidden transition-colors" aria-label="Toggle Menu">
-                    <i id="menu-icon" class="fa-solid fa-bars text-lg"></i>
-                </button>
+                <!-- Action & Mode Toggles -->
+                <div class="flex items-center gap-3">
+                    <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all" aria-label="Toggle tema gelap">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
+                    <a href="#kalkulator" class="hidden sm:inline-flex items-center gap-2 rounded-xl bg-primary-600 px-4 py-2.5 text-sm font-bold text-white hover:bg-primary-700 active:scale-95 shadow-lg shadow-primary-500/20 transition-all">
+                        Mulai Formulasi <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+                    
+                    <!-- Mobile Menu Trigger -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 transition-all" aria-label="Menu navigasi">
+                        <i class="fa-solid fa-bars" id="menu-icon"></i>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <!-- Mobile Drawer Menu -->
-        <div id="mobile-drawer" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 transition-all duration-300">
-            <div class="flex flex-col gap-4 p-5 font-semibold text-slate-700 dark:text-slate-300">
-                <a href="#beranda" class="flex items-center gap-3 py-2 border-b border-slate-100 dark:border-slate-900 hover:text-primary-600" onclick="toggleMenu()">
-                    <i class="fa-solid fa-house w-6 text-primary-500"></i> Beranda
-                </a>
-                <a href="#teknologi" class="flex items-center gap-3 py-2 border-b border-slate-100 dark:border-slate-900 hover:text-primary-600" onclick="toggleMenu()">
-                    <i class="fa-solid fa-microchip w-6 text-primary-500"></i> Teknologi Pengolahan
-                </a>
-                <a href="#kalkulator" class="flex items-center gap-3 py-2 border-b border-slate-100 dark:border-slate-900 hover:text-primary-600" onclick="toggleMenu()">
-                    <i class="fa-solid fa-calculator w-6 text-primary-500"></i> Kalkulator Pakan
-                </a>
-                <a href="#produk" class="flex items-center gap-3 py-2 border-b border-slate-100 dark:border-slate-900 hover:text-primary-600" onclick="toggleMenu()">
-                    <i class="fa-solid fa-seedling w-6 text-primary-500"></i> Formulasi Nutrisi
-                </a>
-                <a href="#edukasi" class="flex items-center gap-3 py-2 hover:text-primary-600" onclick="toggleMenu()">
-                    <i class="fa-solid fa-graduation-cap w-6 text-primary-500"></i> Pusat Edukasi
-                </a>
-                <a href="#kalkulator" class="mt-2 flex w-full items-center justify-center gap-2 rounded-xl bg-primary-600 py-3 text-center text-sm font-semibold text-white shadow-md hover:bg-primary-700" onclick="toggleMenu()">
-                    Cobalah Kalkulator Nutrisi <i class="fa-solid fa-chevron-right text-xs"></i>
-                </a>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 py-3 space-y-2">
+            <a href="#fitur" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Fitur Utama</a>
+            <a href="#kalkulator" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Kalkulator Formulasi</a>
+            <a href="#analisis" onclick="toggleMobileMenu()" class="block px-3 py-2 rounded-lg text-base font-semibold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Hasil Analisis</a>
+            <a href="#kalkulator" onclick="toggleMobileMenu()" class="block w-full text-center px-3 py-2.5 rounded-lg text-base font-bold bg-primary-600 text-white shadow-md">Mulai Formulasi</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative overflow-hidden py-20 lg:py-32">
+        <div class="absolute inset-0 bg-gradient-to-b from-primary-50/50 to-transparent dark:from-primary-950/20 dark:to-transparent -z-10"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                <div class="space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-100 dark:bg-primary-900/40 border border-primary-200 dark:border-primary-800/40 text-primary-700 dark:text-primary-300 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-sparkles"></i> Metode Pearson Square Presisi
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+                        Optimalkan Nutrisi, <br>
+                        <span class="bg-gradient-to-r from-primary-600 to-emerald-500 bg-clip-text text-transparent">Maksimalkan Hasil Ternak</span>
+                    </h1>
+                    <p class="text-lg text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        NutriFeed membantu peternak mandiri merancang formulasi pakan secara akurat demi menunjang bobot, produksi telur, serta kesehatan ternak yang optimal.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#kalkulator" class="inline-flex items-center justify-center gap-2 rounded-xl bg-primary-600 px-6 py-3.5 text-base font-bold text-white hover:bg-primary-700 active:scale-95 shadow-xl shadow-primary-500/20 transition-all">
+                            Mulai Sekarang <i class="fa-solid fa-angle-down"></i>
+                        </a>
+                        <a href="#fitur" class="inline-flex items-center justify-center gap-2 rounded-xl bg-slate-100 dark:bg-slate-800 px-6 py-3.5 text-base font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+                            Pelajari Selengkapnya
+                        </a>
+                    </div>
+                </div>
+                <div class="relative flex justify-center">
+                    <div class="relative w-full max-w-md aspect-video sm:aspect-square rounded-3xl overflow-hidden shadow-2xl border-4 border-white dark:border-slate-900">
+                        <img src="https://images.unsplash.com/photo-1516467508483-a72121e905c5?auto=format&fit=crop&w=800&q=80" alt="Peternakan Modern" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent flex items-end p-6">
+                            <div class="text-white space-y-1">
+                                <p class="text-xs uppercase tracking-wider font-bold text-primary-300">Teknologi Pertanian</p>
+                                <p class="text-lg font-bold">Implementasi Presisi di Era Digital</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="beranda" class="relative overflow-hidden bg-gradient-to-b from-primary-50 via-white to-transparent dark:from-slate-950 dark:via-slate-900 dark:to-transparent py-16 md:py-24">
-        <!-- Floating shapes decoration -->
-        <div class="absolute top-1/4 -left-16 -z-10 h-72 w-72 rounded-full bg-primary-400/10 blur-3xl"></div>
-        <div class="absolute bottom-1/4 -right-16 -z-10 h-72 w-72 rounded-full bg-amber-400/10 blur-3xl"></div>
-
-        <div class="mx-auto max-w-7xl px-4 md:px-6">
-            <div class="grid gap-12 lg:grid-cols-12 lg:items-center">
-                <!-- Text Content -->
-                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <span class="inline-flex items-center gap-1.5 rounded-full bg-primary-100 dark:bg-primary-950/60 px-3 py-1 text-xs font-semibold text-primary-800 dark:text-primary-300">
-                        <span class="h-2 w-2 rounded-full bg-primary-500 animate-pulse"></span> Era Baru Peternakan Modern
-                    </span>
-                    <h1 class="text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-5xl md:text-6xl">
-                        Masa Depan <span class="bg-gradient-to-r from-primary-600 to-green-500 bg-clip-text text-transparent">Pakan Ternak</span> yang Presisi & Efisien
-                    </h1>
-                    <p class="max-w-xl mx-auto lg:mx-0 text-base md:text-lg text-slate-600 dark:text-slate-300">
-                        Optimalkan produktivitas ternak Anda melalui teknologi pengolahan pakan termutakhir, formulasi nutrisi akurat, dan manajemen bahan pakan digital yang berkelanjutan.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                        <a href="#kalkulator" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 rounded-xl bg-primary-600 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-primary-600/25 hover:bg-primary-700 hover:shadow-xl hover:shadow-primary-600/30 active:scale-[0.98] transition-all">
-                            Formulasi Mandiri <i class="fa-solid fa-calculator"></i>
-                        </a>
-                        <a href="#teknologi" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white/50 px-6 py-3.5 text-base font-semibold text-slate-700 dark:border-slate-800 dark:bg-slate-900/50 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-all">
-                            Pelajari Teknologi <i class="fa-solid fa-arrow-down text-xs"></i>
-                        </a>
-                    </div>
-
-                    <!-- Statistics / Trust badges -->
-                    <div class="grid grid-cols-3 gap-4 pt-8 border-t border-slate-200/80 dark:border-slate-800 max-w-lg mx-auto lg:mx-0">
-                        <div>
-                            <p class="text-3xl font-extrabold text-primary-600">25%+</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Efisiensi Biaya Pakan</p>
-                        </div>
-                        <div>
-                            <p class="text-3xl font-extrabold text-primary-600">100%</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Nutrisi Terukur</p>
-                        </div>
-                        <div>
-                            <p class="text-3xl font-extrabold text-primary-600">3x</p>
-                            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pertumbuhan Lebih Cepat</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Interactive Graphic -->
-                <div class="lg:col-span-5 relative">
-                    <div class="relative mx-auto max-w-[380px] sm:max-w-[420px] lg:max-w-none">
-                        <!-- Background glow effect -->
-                        <div class="absolute inset-0 bg-gradient-to-tr from-primary-500/20 to-amber-500/10 rounded-3xl blur-2xl transform rotate-6 scale-95" aria-hidden="true"></div>
-                        
-                        <!-- Main Card -->
-                        <div class="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-950 transition-all">
-                            <div class="flex items-center justify-between border-b border-slate-100 dark:border-slate-900 pb-4 mb-4">
-                                <div class="flex items-center gap-3">
-                                    <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-100 text-emerald-600 dark:bg-emerald-950/50 dark:text-emerald-400">
-                                        <i class="fa-solid fa-network-wired"></i>
-                                    </div>
-                                    <div>
-                                        <h4 class="text-sm font-bold">Smart Feed IoT Hub</h4>
-                                        <span class="text-[10px] text-green-500 font-semibold uppercase tracking-wider">● Sistem Aktif</span>
-                                    </div>
-                                </div>
-                                <span class="rounded-full bg-slate-100 dark:bg-slate-900 px-2.5 py-1 text-[11px] font-semibold">v2.4</span>
-                            </div>
-
-                            <!-- Animated Visual Representation -->
-                            <div class="relative rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 p-5 text-white shadow-inner aspect-[4/3] flex flex-col justify-between">
-                                <div class="flex justify-between items-start">
-                                    <div>
-                                        <span class="text-[10px] text-slate-400 uppercase tracking-widest font-bold">Kadar Kelembaban Pakan</span>
-                                        <h3 class="text-2xl font-black mt-1 text-primary-400">12.4% <span class="text-xs font-normal text-green-400">(Optimal)</span></h3>
-                                    </div>
-                                    <i class="fa-solid fa-droplet text-primary-400 text-xl animate-bounce"></i>
-                                </div>
-
-                                <!-- Dynamic Graph Simulation -->
-                                <div class="h-16 flex items-end gap-1.5 w-full mt-4">
-                                    <div class="bg-primary-500 w-full rounded-t" style="height: 40%"></div>
-                                    <div class="bg-primary-400 w-full rounded-t" style="height: 60%"></div>
-                                    <div class="bg-primary-500 w-full rounded-t" style="height: 55%"></div>
-                                    <div class="bg-primary-300 w-full rounded-t animate-pulse" style="height: 85%"></div>
-                                    <div class="bg-primary-600 w-full rounded-t" style="height: 70%"></div>
-                                    <div class="bg-primary-500 w-full rounded-t" style="height: 90%"></div>
-                                    <div class="bg-amber-400 w-full rounded-t" style="height: 45%"></div>
-                                </div>
-
-                                <div class="flex justify-between items-center text-xs text-slate-400 pt-3 border-t border-slate-800">
-                                    <span>Suhu Mixer: 37.5°C</span>
-                                    <span>Kecepatan: 180 RPM</span>
-                                </div>
-                            </div>
-
-                            <!-- Interactive Progress Info -->
-                            <div class="mt-5 space-y-2.5">
-                                <div class="flex items-center justify-between text-xs font-semibold text-slate-500">
-                                    <span>Target Serat Kasar</span>
-                                    <span>8.5% (Max)</span>
-                                </div>
-                                <div class="h-2 w-full rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden">
-                                    <div class="h-full rounded-full bg-primary-500" style="width: 72%"></div>
-                                </div>
-                                <div class="flex justify-between items-center pt-2">
-                                    <span class="text-xs font-medium text-slate-400">Silo Utama (Silo-A):</span>
-                                    <span class="text-xs font-bold text-slate-700 dark:text-slate-200">8.2 Ton Tersisa</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <!-- FITUR SECTION -->
+    <section id="fitur" class="py-16 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">Mengapa Memilih NutriFeed?</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-300">Pemanfaatan sains nutrisi pakan praktis dalam genggaman Anda.</p>
             </div>
-        </div>
-    </section>
-
-    <!-- TEKNOLOGI PENGOLAHAN UTAMA -->
-    <section id="teknologi" class="py-16 bg-white dark:bg-slate-950 transition-colors">
-        <div class="mx-auto max-w-7xl px-4 md:px-6">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
-                <span class="text-sm font-bold tracking-widest text-primary-600 dark:text-primary-500 uppercase">Metodologi & Proses</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                    4 Pilar Teknologi Pengolahan Pakan Modern
-                </h2>
-                <p class="text-slate-500 dark:text-slate-400">
-                    Proses pengolahan bahan mentah menjadi pakan berkualitas tinggi dengan mempertahankan integritas gizi dan meningkatkan palatabilitas ternak.
-                </p>
-            </div>
-
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <!-- Card 1 -->
-                <div class="group relative rounded-2xl border border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/60 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100 text-primary-600 dark:bg-primary-950/80 dark:text-primary-400 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-arrows-to-dot text-xl"></i>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Fitur 1 -->
+                <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 space-y-4 transition-all hover:shadow-xl hover:shadow-slate-100 dark:hover:shadow-none">
+                    <div class="w-12 h-12 rounded-xl bg-primary-100 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 flex items-center justify-center text-xl shadow-inner">
+                        <i class="fa-solid fa-calculator"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Penepungan (Grinding)</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Reduksi ukuran bahan baku dengan mesin hammer mill pintar untuk meningkatkan efisiensi pencampuran dan memudahkan pencernaan ternak.
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Pearson Square Otomatis</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                        Cukup masukkan target protein serta kadar protein bahan baku pakan yang tersedia, sistem kami akan langsung merancang rasio pencampuran yang presisi.
                     </p>
                 </div>
-
-                <!-- Card 2 -->
-                <div class="group relative rounded-2xl border border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/60 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-100 text-amber-600 dark:bg-amber-950/80 dark:text-amber-400 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-fire-burner text-xl"></i>
+                <!-- Fitur 2 -->
+                <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 space-y-4 transition-all hover:shadow-xl hover:shadow-slate-100 dark:hover:shadow-none">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-xl shadow-inner">
+                        <i class="fa-solid fa-cow"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Pemanasan & Fermentasi</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Proses hidrolisis termal atau biologis (bioteknologi ragi) untuk memecah serat kasar tinggi menjadi karbohidrat sederhana yang mudah diserap.
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Rekomendasi Spesifik Spesies</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                        Pilih template ternak seperti Sapi Potong, Ayam Broiler, atau Ayam Petelur untuk mencocokkan standar nutrisi yang direkomendasikan secara nasional.
                     </p>
                 </div>
-
-                <!-- Card 3 -->
-                <div class="group relative rounded-2xl border border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/60 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600 dark:bg-blue-950/80 dark:text-blue-400 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-cubes text-xl"></i>
+                <!-- Fitur 3 -->
+                <div class="p-8 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 space-y-4 transition-all hover:shadow-xl hover:shadow-slate-100 dark:hover:shadow-none">
+                    <div class="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 flex items-center justify-center text-xl shadow-inner">
+                        <i class="fa-solid fa-chart-pie"></i>
                     </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Peletisasi (Pelleting)</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Pemadatan adonan homogen menggunakan tekanan tinggi dan uap (steaming) menjadi bentuk silinder mini yang kokoh dan tidak mudah hancur.
-                    </p>
-                </div>
-
-                <!-- Card 4 -->
-                <div class="group relative rounded-2xl border border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/60 p-6 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                    <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-purple-100 text-purple-600 dark:bg-purple-950/80 dark:text-purple-400 group-hover:scale-110 transition-transform">
-                        <i class="fa-solid fa-chart-line text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Suplementasi Mikro</h3>
-                    <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
-                        Penambahan presisi vitamin lipofilik, asam amino esensial (Metionin & Lisin), serta probiotik pasca-peletisasi guna menjaga vitalitas biologisnya.
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Visualisasi Interaktif</h3>
+                    <p class="text-slate-600 dark:text-slate-300 leading-relaxed text-sm">
+                        Pantau persentase kontribusi protein dan komposisi bahan baku pakan Anda secara langsung menggunakan grafik donat interaktif.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- INTERACTIVE FORMULATION CALCULATOR (Pearson's Square Model with Strict Security) -->
-    <section id="kalkulator" class="py-16 bg-slate-50 dark:bg-slate-900 transition-colors">
-        <div class="mx-auto max-w-7xl px-4 md:px-6">
-            <div class="grid gap-12 lg:grid-cols-12 lg:items-start">
-                
-                <!-- Calculator Explanation Column -->
-                <div class="lg:col-span-5 space-y-6">
-                    <span class="text-sm font-bold tracking-widest text-primary-600 dark:text-primary-500 uppercase">Simulasi Interaktif Secure</span>
-                    <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">
-                        Kalkulator Formulasi Pakan <span class="text-primary-600">Metode Pearson Square</span>
-                    </h2>
-                    <p class="text-slate-600 dark:text-slate-300">
-                        Metode klasik yang diotomatisasi secara digital. Tentukan target kadar Protein Kasar (PK) yang Anda inginkan, masukkan data kadar protein dari dua kelompok bahan pakan Anda (Sumber Energi dan Sumber Protein), lalu biarkan sistem menghitung porsi yang tepat secara instan!
-                    </p>
-                    <div class="space-y-4">
-                        <div class="flex items-start gap-3">
-                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-950/50 dark:text-primary-400 text-xs font-bold">1</span>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">
-                                <strong>Bahan Sumber Energi:</strong> Biasanya berkadar protein rendah (&lt;20%), contohnya Jagung, Dedak Padi, atau Onggok.
-                            </p>
-                        </div>
-                        <div class="flex items-start gap-3">
-                            <span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-primary-100 text-primary-600 dark:bg-primary-950/50 dark:text-primary-400 text-xs font-bold">2</span>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">
-                                <strong>Bahan Sumber Protein:</strong> Berkadar protein tinggi (&gt;20%), seperti Bungkil Kedelai, Tepung Ikan, atau Ampas Tahu.
-                            </p>
-                        </div>
-                    </div>
+    <!-- KALKULATOR SECTION -->
+    <main id="kalkulator" class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12 space-y-4">
+                <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white sm:text-4xl">Kalkulator Formulasi Pakan</h2>
+                <p class="text-lg text-slate-600 dark:text-slate-300">Sesuaikan target protein dan kelola bahan pakan dengan akurasi tinggi.</p>
+            </div>
+
+            <!-- TABS & TEMPLATE CHIPS -->
+            <div class="flex flex-col gap-6 mb-8">
+                <!-- Tab Headers -->
+                <div class="flex overflow-x-auto pb-2 gap-2 border-b border-slate-200 dark:border-slate-800">
+                    <button id="btn-calc-tab" onclick="switchTab('calc-tab')" class="tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold bg-primary-600 text-white shadow-md transition-all">
+                        <i class="fa-solid fa-calculator"></i> Kalkulator Pearson Square
+                    </button>
+                    <!-- Tab Edukasi/Informasi di bagian isi juga dipertahankan jika diperlukan secara struktural, namun dihapus dari navbar atas -->
                 </div>
 
-                <!-- Core Calculator Board -->
-                <div class="lg:col-span-7">
-                    <div class="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl dark:border-slate-800 dark:bg-slate-950">
-                        <div class="mb-6 flex items-center justify-between border-b border-slate-100 dark:border-slate-900 pb-4">
-                            <h3 class="text-lg font-bold flex items-center gap-2">
-                                <i class="fa-solid fa-square-poll-horizontal text-primary-600"></i> Alat Hitung Nutrisi Pakan Secure
-                            </h3>
-                            <button onclick="resetCalculator()" class="text-xs font-medium text-red-500 hover:underline">
-                                Reset Parameter
-                            </button>
-                        </div>
-
-                        <!-- Parameters Input -->
-                        <div class="grid gap-5 md:grid-cols-3">
-                            <!-- Target Protein -->
-                            <div>
-                                <label for="target-pk" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Target PK Ternak (%)</label>
-                                <div class="relative rounded-xl border border-slate-200 dark:border-slate-800 focus-within:border-primary-500 dark:focus-within:border-primary-500 overflow-hidden">
-                                    <input type="number" id="target-pk" value="16" min="1" max="99" step="0.1" class="w-full bg-transparent px-3 py-2.5 outline-none font-semibold text-slate-800 dark:text-white">
-                                    <span class="absolute right-3 top-2.5 text-xs text-slate-400 font-bold">%</span>
-                                </div>
-                            </div>
-                            <!-- Feed 1 (Energy) Protein -->
-                            <div>
-                                <label for="feed-energy-pk" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">PK Energi / Bahan A (%)</label>
-                                <div class="relative rounded-xl border border-slate-200 dark:border-slate-800 focus-within:border-primary-500 dark:focus-within:border-primary-500 overflow-hidden">
-                                    <input type="number" id="feed-energy-pk" value="9" min="1" max="99" step="0.1" class="w-full bg-transparent px-3 py-2.5 outline-none font-semibold text-slate-800 dark:text-white">
-                                    <span class="absolute right-3 top-2.5 text-xs text-slate-400 font-bold">%</span>
-                                </div>
-                            </div>
-                            <!-- Feed 2 (Protein) Protein -->
-                            <div>
-                                <label for="feed-protein-pk" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">PK Protein / Bahan B (%)</label>
-                                <div class="relative rounded-xl border border-slate-200 dark:border-slate-800 focus-within:border-primary-500 dark:focus-within:border-primary-500 overflow-hidden">
-                                    <input type="number" id="feed-protein-pk" value="44" min="1" max="99" step="0.1" class="w-full bg-transparent px-3 py-2.5 outline-none font-semibold text-slate-800 dark:text-white">
-                                    <span class="absolute right-3 top-2.5 text-xs text-slate-400 font-bold">%</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Labels Input Optional (Protected against XSS and Injection) -->
-                        <div class="grid gap-5 md:grid-cols-2 mt-4">
-                            <div>
-                                <label for="feed-a-name" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Nama Bahan A (Maks 30 Karakter)</label>
-                                <input type="text" id="feed-a-name" value="Jagung Kuning" maxlength="30" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-3 py-2.5 outline-none font-medium text-slate-800 dark:text-white text-sm focus:border-primary-500">
-                            </div>
-                            <div>
-                                <label for="feed-b-name" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Nama Bahan B (Maks 30 Karakter)</label>
-                                <input type="text" id="feed-b-name" value="Bungkil Kedelai" maxlength="30" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-transparent px-3 py-2.5 outline-none font-medium text-slate-800 dark:text-white text-sm focus:border-primary-500">
-                            </div>
-                        </div>
-
-                        <!-- Total Batch Weight -->
-                        <div class="mt-4">
-                            <label for="batch-weight" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Total Jumlah Pakan yang Ingin Dibuat (Kg)</label>
-                            <div class="relative rounded-xl border border-slate-200 dark:border-slate-800 focus-within:border-primary-500 dark:focus-within:border-primary-500 overflow-hidden">
-                                <input type="number" id="batch-weight" value="1000" min="1" max="1000000" class="w-full bg-transparent px-3 py-2.5 outline-none font-semibold text-slate-800 dark:text-white">
-                                <span class="absolute right-3 top-2.5 text-xs text-slate-400 font-bold">Kg</span>
-                            </div>
-                        </div>
-
-                        <!-- Process Action Button (Secured with Rate-Limit Cooldown) -->
-                        <button id="btn-calculate" onclick="calculatePearsonSquare()" class="mt-6 w-full flex items-center justify-center gap-2.5 rounded-xl bg-primary-600 py-3.5 text-sm font-bold text-white shadow-lg shadow-primary-600/25 hover:bg-primary-700 active:scale-[0.99] transition-all">
-                            <span id="btn-calc-text">Hitung Proporsi Formulasi</span> <i class="fa-solid fa-gears"></i>
+                <!-- Template Selector -->
+                <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
+                    <h3 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Pilih Template Ternak</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="applyTemplate('broiler')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
+                            🐥 Ayam Broiler (21% CP)
                         </button>
+                        <button onclick="applyTemplate('layer')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
+                            🐔 Ayam Petelur (17% CP)
+                        </button>
+                        <button onclick="applyTemplate('cow')" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 font-semibold text-sm transition-all flex items-center gap-2">
+                            🐂 Sapi Potong (14% CP)
+                        </button>
+                    </div>
+                </div>
+            </div>
 
-                        <!-- Error Banner (Hidden by default) -->
-                        <div id="calculator-error" class="hidden mt-4 rounded-xl bg-red-50 dark:bg-red-950/40 p-4 border border-red-200 dark:border-red-900/60 text-red-600 dark:text-red-400 text-xs font-semibold flex items-start gap-2.5">
-                            <i class="fa-solid fa-triangle-exclamation text-base"></i>
-                            <span id="error-message">Nilai protein target harus berada di antara protein Bahan A dan Bahan B!</span>
+            <!-- TAB CONTENT: CALCULATOR -->
+            <div id="calc-tab" class="tab-content block">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- INPUT PANEL -->
+                    <div class="lg:col-span-5 bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-sliders text-primary-600"></i> Pengaturan Formulasi
+                            </h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Masukkan parameter bahan baku dan target nutrisi.</p>
                         </div>
 
-                        <!-- Results Dashboard (Hidden until calculated) -->
-                        <div id="calculator-result" class="hidden mt-8 border-t border-slate-100 dark:border-slate-900 pt-6 space-y-6">
-                            <h4 class="text-sm font-bold uppercase tracking-wider text-slate-400">Hasil Analisis Formulasi</h4>
-                            
-                            <!-- Visual Graphic Result -->
-                            <div class="grid gap-4 md:grid-cols-2">
-                                <!-- Box 1: Bahan A -->
-                                <div class="rounded-2xl bg-primary-50/50 dark:bg-primary-950/20 p-5 border border-primary-100/50 dark:border-primary-900/30 flex flex-col justify-between">
-                                    <div>
-                                        <span class="text-xs font-medium text-slate-400">Kebutuhan Bahan A</span>
-                                        <h5 id="res-name-a" class="text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">Bahan A</h5>
-                                    </div>
-                                    <div class="mt-4">
-                                        <div class="text-3xl font-black text-primary-600"><span id="res-percent-a">0</span>%</div>
-                                        <div class="text-xs font-medium text-slate-500 mt-0.5">Sama dengan <span id="res-kg-a" class="font-extrabold text-slate-800 dark:text-white">0</span> Kg</div>
-                                    </div>
-                                </div>
+                        <!-- Target Protein -->
+                        <div class="space-y-2">
+                            <label for="target-protein" class="block text-sm font-bold text-slate-700 dark:text-slate-300">Target Crude Protein (%)</label>
+                            <input type="number" id="target-protein" value="17" step="0.1" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold" placeholder="Contoh: 17">
+                        </div>
 
-                                <!-- Box 2: Bahan B -->
-                                <div class="rounded-2xl bg-amber-50/50 dark:bg-amber-950/20 p-5 border border-amber-100/50 dark:border-amber-900/30 flex flex-col justify-between">
-                                    <div>
-                                        <span class="text-xs font-medium text-slate-400">Kebutuhan Bahan B</span>
-                                        <h5 id="res-name-b" class="text-lg font-extrabold text-slate-900 dark:text-white mt-0.5">Bahan B</h5>
-                                    </div>
-                                    <div class="mt-4">
-                                        <div class="text-3xl font-black text-amber-500"><span id="res-percent-b">0</span>%</div>
-                                        <div class="text-xs font-medium text-slate-500 mt-0.5">Sama dengan <span id="res-kg-b" class="font-extrabold text-slate-800 dark:text-white">0</span> Kg</div>
-                                    </div>
-                                </div>
+                        <!-- Total Berat Pakan -->
+                        <div class="space-y-2">
+                            <label for="total-weight" class="block text-sm font-bold text-slate-700 dark:text-slate-300">Total Produksi Pakan (kg)</label>
+                            <input type="number" id="total-weight" value="100" step="1" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold" placeholder="Contoh: 100">
+                        </div>
+
+                        <hr class="border-slate-200 dark:border-slate-800">
+
+                        <!-- Bahan Pakan A (Energi Tinggi) -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Bahan Pakan 1 (Basal / Energi)</span>
+                                <span class="text-xs px-2 py-1 rounded bg-slate-100 dark:bg-slate-800 font-semibold text-slate-500 dark:text-slate-400">Protein Rendah</span>
                             </div>
-
-                            <!-- Bar Graph -->
                             <div class="space-y-2">
-                                <div class="flex justify-between text-xs font-bold">
-                                    <span class="text-primary-600" id="bar-label-a">Bahan A (0%)</span>
-                                    <span class="text-amber-500" id="bar-label-b">Bahan B (0%)</span>
-                                </div>
-                                <div class="h-4 w-full rounded-full bg-slate-100 dark:bg-slate-900 overflow-hidden flex">
-                                    <div id="bar-fill-a" class="h-full bg-primary-500 transition-all duration-700" style="width: 50%"></div>
-                                    <div id="bar-fill-b" class="h-full bg-amber-400 transition-all duration-700" style="width: 50%"></div>
-                                </div>
+                                <label for="feed-a-name" class="block text-xs font-semibold text-slate-600 dark:text-slate-400">Nama Bahan</label>
+                                <input type="text" id="feed-a-name" value="Jagung Kuning Giling" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold">
                             </div>
-
-                            <!-- Success Note -->
-                            <div class="rounded-xl bg-emerald-50 dark:bg-emerald-950/30 p-4 border border-emerald-100 dark:border-emerald-900/40 flex items-start gap-3">
-                                <i class="fa-solid fa-circle-check text-emerald-500 mt-0.5 text-lg"></i>
-                                <div>
-                                    <h5 class="text-xs font-bold text-slate-900 dark:text-white">Keseimbangan Protein Kasar Tercapai</h5>
-                                    <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed mt-1">
-                                        Formulasi di atas secara matematis akan menghasilkan kadar protein kasar total sebesar <span id="res-target-pk" class="font-bold text-emerald-600 dark:text-emerald-400">0</span>% dalam <span id="res-total-kg" class="font-bold text-slate-800 dark:text-slate-200">0</span> kg campuran pakan Anda.
-                                    </p>
-                                </div>
+                            <div class="space-y-2">
+                                <label for="feed-a-protein" class="block text-xs font-semibold text-slate-600 dark:text-slate-400">Kandungan Protein (%)</label>
+                                <input type="number" id="feed-a-protein" value="9" step="0.1" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold">
                             </div>
                         </div>
 
-                    </div>
-                </div>
+                        <hr class="border-slate-200 dark:border-slate-800">
 
-            </div>
-        </div>
-    </section>
-
-    <!-- FORMULASI ACUAN TERNAK POPULER -->
-    <section id="produk" class="py-16 bg-white dark:bg-slate-950 transition-colors">
-        <div class="mx-auto max-w-7xl px-4 md:px-6">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
-                <span class="text-sm font-bold tracking-widest text-primary-600 dark:text-primary-500 uppercase">Acuan Nutrisi Standard</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                    Kebutuhan Nutrisi Berbagai Jenis Ternak
-                </h2>
-                <p class="text-slate-500 dark:text-slate-400">
-                    Standar nutrisi pakan berdasarkan siklus hidup dan jenis hewan ternak untuk mencapai bobot dan produktivitas ideal.
-                </p>
-            </div>
-
-            <!-- Tab Navigation (Custom Interactive) -->
-            <div class="flex justify-start md:justify-center overflow-x-auto pb-4 mb-8 no-scrollbar gap-2">
-                <button onclick="switchTab('tab-broiler')" id="btn-tab-broiler" class="tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold bg-primary-600 text-white shadow-md transition-all">
-                    <i class="fa-solid fa-feather"></i> Ayam Broiler
-                </button>
-                <button onclick="switchTab('tab-layer')" id="btn-tab-layer" class="tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 transition-all">
-                    <i class="fa-solid fa-egg"></i> Ayam Petelur (Layer)
-                </button>
-                <button onclick="switchTab('tab-ruminansia')" id="btn-tab-ruminansia" class="tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 transition-all">
-                    <i class="fa-solid fa-cow"></i> Sapi Potong
-                </button>
-                <button onclick="switchTab('tab-perah')" id="btn-tab-perah" class="tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:bg-slate-800 transition-all">
-                    <i class="fa-solid fa-glass-water"></i> Sapi Perah
-                </button>
-            </div>
-
-            <!-- Tab Contents -->
-            <div id="tab-container" class="relative">
-                
-                <!-- Tab Broiler -->
-                <div id="tab-broiler" class="tab-content block space-y-6">
-                    <div class="grid gap-6 md:grid-cols-3">
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-300 text-xs font-bold px-2.5 py-1">Fase Starter (0-2 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Starter Broiler</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">22% - 24%</strong></li>
-                                <li class="flex justify-between"><span>Energi Metabolis:</span> <strong class="text-slate-800 dark:text-slate-200">3000 Kkal/kg</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar Max:</span> <strong class="text-slate-800 dark:text-slate-200">4.0%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">1.0%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(23, 9, 44, 'Starter Broiler')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
+                        <!-- Bahan Pakan B (Protein Tinggi) -->
+                        <div class="space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Bahan Pakan 2 (Suplemen)</span>
+                                <span class="text-xs px-2 py-1 rounded bg-primary-50 dark:bg-primary-950 text-primary-700 dark:text-primary-300 font-bold">Protein Tinggi</span>
+                            </div>
+                            <div class="space-y-2">
+                                <label for="feed-b-name" class="block text-xs font-semibold text-slate-600 dark:text-slate-400">Nama Bahan</label>
+                                <input type="text" id="feed-b-name" value="Bungkil Kedelai" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold">
+                            </div>
+                            <div class="space-y-2">
+                                <label for="feed-b-protein" class="block text-xs font-semibold text-slate-600 dark:text-slate-400">Kandungan Protein (%)</label>
+                                <input type="number" id="feed-b-protein" value="44" step="0.1" class="w-full rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-semibold">
+                            </div>
                         </div>
+
+                        <button onclick="calculatePearsonSquare()" class="w-full rounded-xl bg-primary-600 py-3.5 text-base font-bold text-white hover:bg-primary-700 active:scale-95 shadow-lg shadow-primary-500/20 transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> Kalkulasi Ulang
+                        </button>
+                    </div>
+
+                    <!-- OUTPUT PANEL -->
+                    <div id="analisis" class="lg:col-span-7 space-y-6">
                         
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 text-xs font-bold px-2.5 py-1">Fase Grower (3-4 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Grower Broiler</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">20% - 21.5%</strong></li>
-                                <li class="flex justify-between"><span>Energi Metabolis:</span> <strong class="text-slate-800 dark:text-slate-200">3100 Kkal/kg</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar Max:</span> <strong class="text-slate-800 dark:text-slate-200">4.5%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">0.9%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(21, 9, 44, 'Grower Broiler')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
+                        <!-- NOTIFICATION BAR -->
+                        <div id="result-status" class="hidden rounded-2xl p-4 flex items-center gap-3">
+                            <div id="status-icon" class="text-xl"></div>
+                            <div id="status-message" class="text-sm font-semibold"></div>
                         </div>
 
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 text-xs font-bold px-2.5 py-1">Fase Finisher (&gt;5 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Finisher Broiler</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">19% - 20%</strong></li>
-                                <li class="flex justify-between"><span>Energi Metabolis:</span> <strong class="text-slate-800 dark:text-slate-200">3200 Kkal/kg</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar Max:</span> <strong class="text-slate-800 dark:text-slate-200">5.0%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">0.8%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(19.5, 9, 44, 'Finisher Broiler')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
+                        <!-- RESULT CARD -->
+                        <div class="bg-white dark:bg-slate-900 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-6 transition-colors">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <i class="fa-solid fa-chart-line text-emerald-500"></i> Hasil Formulasi
+                            </h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Ratio Table / Cards -->
+                                <div class="space-y-4">
+                                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 space-y-1">
+                                        <div class="flex justify-between items-center">
+                                            <span id="label-feed-a" class="text-sm font-bold text-slate-700 dark:text-slate-300">Bahan 1</span>
+                                            <span class="text-xs text-slate-400 font-semibold">Bahan Basal</span>
+                                        </div>
+                                        <div class="flex items-baseline gap-2">
+                                            <span id="pct-feed-a" class="text-2xl font-extrabold text-slate-900 dark:text-white">0%</span>
+                                            <span id="weight-feed-a" class="text-sm font-bold text-slate-500 dark:text-slate-400">(0 kg)</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 space-y-1">
+                                        <div class="flex justify-between items-center">
+                                            <span id="label-feed-b" class="text-sm font-bold text-slate-700 dark:text-slate-300">Bahan 2</span>
+                                            <span class="text-xs text-primary-500 font-semibold">Bahan Protein</span>
+                                        </div>
+                                        <div class="flex items-baseline gap-2">
+                                            <span id="pct-feed-b" class="text-2xl font-extrabold text-slate-900 dark:text-white">0%</span>
+                                            <span id="weight-feed-b" class="text-sm font-bold text-slate-500 dark:text-slate-400">(0 kg)</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Chart Container -->
+                                <div class="flex items-center justify-center min-h-[180px]">
+                                    <div class="w-full max-w-[200px]">
+                                        <canvas id="ratioChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr class="border-slate-200 dark:border-slate-800">
+
+                            <!-- Pearson Square Math Visualizer -->
+                            <div class="space-y-3">
+                                <h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Perhitungan Pearson Square</h4>
+                                <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200/60 dark:border-slate-800/60 text-xs font-mono space-y-2 text-slate-600 dark:text-slate-300 leading-relaxed overflow-x-auto">
+                                    <div id="math-step-1">1. Nilai mutlak selisih (Bahan 1 vs Target): -</div>
+                                    <div id="math-step-2">2. Nilai mutlak selisih (Bahan 2 vs Target): -</div>
+                                    <div id="math-step-3">3. Total parts: -</div>
+                                    <div id="math-step-4">4. Persentase Bahan 1: -</div>
+                                    <div id="math-step-5">5. Persentase Bahan 2: -</div>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
-
-                <!-- Tab Layer -->
-                <div id="tab-layer" class="tab-content hidden space-y-6">
-                    <div class="grid gap-6 md:grid-cols-3">
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-300 text-xs font-bold px-2.5 py-1">Starter (0-6 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Starter Layer</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">18% - 20%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">1.0%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.7%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(19, 9, 44, 'Starter Layer')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-                        
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 text-xs font-bold px-2.5 py-1">Grower (7-20 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Grower Layer</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">15% - 17%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">1.2%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.6%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(16, 9, 44, 'Grower Layer')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300 text-xs font-bold px-2.5 py-1">Layer Aktif (&gt;20 Minggu)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Masa Produksi</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">16.5% - 18%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca) Tinggi:</span> <strong class="text-slate-800 dark:text-slate-200">3.5% - 4.2%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.7%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(17, 9, 44, 'Layer Produksi')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab Sapi Potong -->
-                <div id="tab-ruminansia" class="tab-content hidden space-y-6">
-                    <div class="grid gap-6 md:grid-cols-3">
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-green-100 text-green-700 dark:bg-green-950/40 dark:text-green-300 text-xs font-bold px-2.5 py-1">Masa Pertumbuhan (Pedet)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Starter Konsentrat</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">16% - 18%</strong></li>
-                                <li class="flex justify-between"><span>TDN (Nutrisi Total):</span> <strong class="text-slate-800 dark:text-slate-200">&gt; 70%</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">&lt; 10%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(17, 12, 36, 'Pedet Sapi')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300 text-xs font-bold px-2.5 py-1">Penggemukan (Fattening)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Finisher Konsentrat</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">12% - 14%</strong></li>
-                                <li class="flex justify-between"><span>TDN (Nutrisi Total):</span> <strong class="text-slate-800 dark:text-slate-200">&gt; 68%</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">&lt; 15%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(13, 10, 36, 'Sapi Penggemukan')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 text-xs font-bold px-2.5 py-1">Induk / Sapi Dewasa</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Konsentrat Pemeliharaan</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">11% - 12%</strong></li>
-                                <li class="flex justify-between"><span>TDN (Nutrisi Total):</span> <strong class="text-slate-800 dark:text-slate-200">&gt; 60%</strong></li>
-                                <li class="flex justify-between"><span>Serat Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">&lt; 18%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(11.5, 8, 32, 'Sapi Dewasa')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Tab Sapi Perah -->
-                <div id="tab-perah" class="tab-content hidden space-y-6">
-                    <div class="grid gap-6 md:grid-cols-3">
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300 text-xs font-bold px-2.5 py-1">Masa Laktasi</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Laktasi Tinggi</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">16% - 18%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">0.9%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.6%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(17, 10, 38, 'Sapi Laktasi')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-950/40 dark:text-purple-300 text-xs font-bold px-2.5 py-1">Kering Kandang (Dry-off)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Kering Kandang</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">12% - 13%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">0.5%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.3%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(12.5, 9, 36, 'Sapi Kering Kandang')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-
-                        <div class="rounded-2xl border border-slate-200 dark:border-slate-900 p-6 space-y-4 bg-slate-50/50 dark:bg-slate-900/40">
-                            <span class="rounded-lg bg-orange-100 text-orange-700 dark:bg-orange-950/40 dark:text-orange-300 text-xs font-bold px-2.5 py-1">Masa Transisi (Pra-Melahirkan)</span>
-                            <h4 class="text-xl font-bold text-slate-900 dark:text-white">Pakan Transisi</h4>
-                            <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400">
-                                <li class="flex justify-between"><span>Protein Kasar:</span> <strong class="text-slate-800 dark:text-slate-200">14% - 15%</strong></li>
-                                <li class="flex justify-between"><span>Kalsium (Ca):</span> <strong class="text-slate-800 dark:text-slate-200">0.7%</strong></li>
-                                <li class="flex justify-between"><span>Fosfor (P):</span> <strong class="text-slate-800 dark:text-slate-200">0.4%</strong></li>
-                            </ul>
-                            <button onclick="loadPreset(14.5, 9, 36, 'Transisi Sapi Perah')" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 py-2.5 text-xs font-bold text-white dark:bg-white dark:text-slate-950 hover:bg-slate-800">
-                                Gunakan di Kalkulator <i class="fa-solid fa-calculator text-[10px]"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
             </div>
+
         </div>
-    </section>
+    </main>
 
-    <!-- EDUKASI & INFORMASI BAHAN PAKAN -->
-    <section id="edukasi" class="py-16 bg-slate-50 dark:bg-slate-900 transition-colors">
-        <div class="mx-auto max-w-7xl px-4 md:px-6">
-            <div class="text-center max-w-3xl mx-auto space-y-4 mb-14">
-                <span class="text-sm font-bold tracking-widest text-primary-600 dark:text-primary-500 uppercase">Pusat Informasi</span>
-                <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
-                    Kandungan Gizi Bahan Pakan Lokal
-                </h2>
-                <p class="text-slate-500 dark:text-slate-400">
-                    Pelajari bahan pakan lokal yang melimpah di Indonesia untuk memformulasikan pakan bermutu dengan harga yang terjangkau.
-                </p>
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-12 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-2">
+                <div class="bg-primary-600 text-white p-2 rounded-xl shadow-md">
+                    <i class="fa-solid fa-wheat-awn text-md"></i>
+                </div>
+                <span class="text-lg font-bold tracking-tight bg-gradient-to-r from-primary-600 to-emerald-500 bg-clip-text text-transparent">NutriFeed</span>
             </div>
-
-            <!-- Interactive Grid of Raw Materials -->
-            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-                <!-- Bahan 1 -->
-                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-5 space-y-4 shadow-sm hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between">
-                        <span class="text-2xl" aria-hidden="true">🌽</span>
-                        <span class="rounded-full bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Sumber Energi</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Jagung Kuning</h4>
-                        <p class="text-xs text-slate-400 mt-1">Sangat disukai unggas dan ruminansia karena kaya akan karbohidrat mudah dicerna.</p>
-                    </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-900 grid grid-cols-2 gap-2 text-xs">
-                        <div>
-                            <span class="block text-slate-400">Protein Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 8.9%</span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400">Serat Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 2.0%</span>
-                        </div>
-                    </div>
-                    <button onclick="setAsFeedA('Jagung Kuning', 8.9)" class="w-full py-2 text-xs font-semibold text-primary-600 bg-primary-50 dark:bg-primary-950/30 hover:bg-primary-100 rounded-lg transition-colors">
-                        Gunakan Sebagai Bahan A
-                    </button>
-                </div>
-
-                <!-- Bahan 2 -->
-                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-5 space-y-4 shadow-sm hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between">
-                        <span class="text-2xl" aria-hidden="true">🌾</span>
-                        <span class="rounded-full bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Sumber Energi</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Dedak Padi Halus</h4>
-                        <p class="text-xs text-slate-400 mt-1">Hasil samping penggilingan padi. Pilih dedak murni bebas sekam.</p>
-                    </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-900 grid grid-cols-2 gap-2 text-xs">
-                        <div>
-                            <span class="block text-slate-400">Protein Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 12.0%</span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400">Serat Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 11.5%</span>
-                        </div>
-                    </div>
-                    <button onclick="setAsFeedA('Dedak Padi Halus', 12.0)" class="w-full py-2 text-xs font-semibold text-primary-600 bg-primary-50 dark:bg-primary-950/30 hover:bg-primary-100 rounded-lg transition-colors">
-                        Gunakan Sebagai Bahan A
-                    </button>
-                </div>
-
-                <!-- Bahan 3 -->
-                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-5 space-y-4 shadow-sm hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between">
-                        <span class="text-2xl" aria-hidden="true">🫘</span>
-                        <span class="rounded-full bg-amber-50 dark:bg-amber-950/50 px-2.5 py-1 text-[11px] font-bold text-amber-600 dark:text-amber-400">Sumber Protein</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Bungkil Kedelai (SBM)</h4>
-                        <p class="text-xs text-slate-400 mt-1">Standar emas sumber asam amino lengkap untuk unggas dan ruminansia.</p>
-                    </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-900 grid grid-cols-2 gap-2 text-xs">
-                        <div>
-                            <span class="block text-slate-400">Protein Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 44.0%</span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400">Serat Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 6.0%</span>
-                        </div>
-                    </div>
-                    <button onclick="setAsFeedB('Bungkil Kedelai', 44.0)" class="w-full py-2 text-xs font-semibold text-amber-600 bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 rounded-lg transition-colors">
-                        Gunakan Sebagai Bahan B
-                    </button>
-                </div>
-
-                <!-- Bahan 4 -->
-                <div class="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-5 space-y-4 shadow-sm hover:shadow-md transition-all">
-                    <div class="flex items-center justify-between">
-                        <span class="text-2xl" aria-hidden="true">🐟</span>
-                        <span class="rounded-full bg-amber-50 dark:bg-amber-950/50 px-2.5 py-1 text-[11px] font-bold text-amber-600 dark:text-amber-400">Sumber Protein</span>
-                    </div>
-                    <div>
-                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Tepung Ikan Murni</h4>
-                        <p class="text-xs text-slate-400 mt-1">Kandungan protein sangat tinggi ditambah dengan mineral kalsium dan fosfor alami.</p>
-                    </div>
-                    <div class="pt-3 border-t border-slate-100 dark:border-slate-900 grid grid-cols-2 gap-2 text-xs">
-                        <div>
-                            <span class="block text-slate-400">Protein Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 55.0%</span>
-                        </div>
-                        <div>
-                            <span class="block text-slate-400">Serat Kasar</span>
-                            <span class="font-extrabold text-slate-700 dark:text-slate-200">~ 1.5%</span>
-                        </div>
-                    </div>
-                    <button onclick="setAsFeedB('Tepung Ikan', 55.0)" class="w-full py-2 text-xs font-semibold text-amber-600 bg-amber-50 dark:bg-amber-950/30 hover:bg-amber-100 rounded-lg transition-colors">
-                        Gunakan Sebagai Bahan B
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER SECTION -->
-    <footer class="bg-slate-950 text-slate-400 border-t border-slate-900 transition-colors">
-        <div class="mx-auto max-w-7xl px-4 py-12 md:px-6">
-            <div class="grid gap-8 md:grid-cols-4">
-                <!-- Company Info -->
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2.5">
-                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600 text-white shadow-md shadow-primary-500/20">
-                            <i class="fa-solid fa-wheat-awn text-lg"></i>
-                        </div>
-                        <span class="text-xl font-extrabold tracking-tight text-white">Nutri<span class="text-primary-500">Feed</span></span>
-                    </div>
-                    <p class="text-xs leading-relaxed">
-                        Kami berdedikasi untuk membantu para peternak modern di Indonesia dalam menyusun formulasi pakan secara presisi, hemat biaya, dan efisien.
-                    </p>
-                </div>
-
-                <!-- Navigation Links -->
-                <div>
-                    <span class="block text-sm font-bold text-white uppercase tracking-wider mb-4">Navigasi</span>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="#beranda" class="hover:text-primary-500 transition-colors">Beranda</a></li>
-                        <li><a href="#teknologi" class="hover:text-primary-500 transition-colors">Teknologi</a></li>
-                        <li><a href="#kalkulator" class="hover:text-primary-500 transition-colors">Kalkulator Pakan</a></li>
-                        <li><a href="#produk" class="hover:text-primary-500 transition-colors">Acuan Nutrisi</a></li>
-                        <li><a href="#edukasi" class="hover:text-primary-500 transition-colors">Edukasi Bahan</a></li>
-                    </ul>
-                </div>
-
-                <!-- Resources Links -->
-                <div>
-                    <span class="block text-sm font-bold text-white uppercase tracking-wider mb-4">Alat & Fitur</span>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="#kalkulator" class="hover:text-primary-500 transition-colors">Pearson Square Model</a></li>
-                        <li><a href="#produk" class="hover:text-primary-500 transition-colors">Standar Gizi Unggas</a></li>
-                        <li><a href="#produk" class="hover:text-primary-500 transition-colors">Standar Gizi Ruminansia</a></li>
-                        <li><a href="#edukasi" class="hover:text-primary-500 transition-colors">Database Pakan Lokal</a></li>
-                    </ul>
-                </div>
-
-                <!-- Contact & Support -->
-                <div class="space-y-4">
-                    <span class="block text-sm font-bold text-white uppercase tracking-wider mb-4">Kontak Kami</span>
-                    <p class="text-xs">
-                        Pertanyaan seputar optimasi formulasi pakan atau integrasi mesin IoT? Hubungi kami langsung.
-                    </p>
-                    <div class="flex items-center gap-3">
-                        <a href="mailto:support@nutrifeed.co.id" class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" aria-label="Kirim Email">
-                            <i class="fa-solid fa-envelope"></i>
-                        </a>
-                        <a href="#" class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" aria-label="Kontak Whatsapp">
-                            <i class="fa-brands fa-whatsapp"></i>
-                        </a>
-                        <a href="https://github.com" class="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-slate-300 hover:text-white hover:bg-slate-800 transition-colors" aria-label="Halaman Github" target="_blank" rel="noopener noreferrer">
-                            <i class="fa-brands fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Bottom Copyright -->
-            <div class="mt-12 pt-6 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-[11px] gap-4 text-slate-500">
-                <p>© 2026 NutriFeed. Seluruh Hak Cipta Dilindungi. Didukung oleh GitHub Pages secara aman.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="hover:underline">Kebijakan Privasi</a>
-                    <a href="#" class="hover:underline">Syarat Penggunaan</a>
-                </div>
-            </div>
+            <p class="text-sm text-slate-500 dark:text-slate-400 text-center md:text-left">
+                &copy; 2026 NutriFeed Smart Agriculture. Semua hak cipta dilindungi undang-undang.
+            </p>
         </div>
     </footer>
 
-    <!-- INTERACTIVE JAVASCRIPT LOGIC (SECURED) -->
+    <!-- JAVASCRIPT LOGIC -->
     <script>
-        // Theme Management (Dark Mode)
-        const themeToggleBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
+        let myChart = null;
 
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            themeIcon.className = 'fa-solid fa-sun';
-        } else {
-            document.documentElement.classList.remove('dark');
-            themeIcon.className = 'fa-solid fa-moon';
-        }
-
-        themeToggleBtn.addEventListener('click', function() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('color-theme', 'light');
-                themeIcon.className = 'fa-solid fa-moon';
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('color-theme', 'dark');
-                themeIcon.className = 'fa-solid fa-sun';
-            }
-        });
-
-        // Mobile Menu Drawer Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileDrawer = document.getElementById('mobile-drawer');
-        const menuIcon = document.getElementById('menu-icon');
-
-        mobileMenuBtn.addEventListener('click', toggleMenu);
-
-        function toggleMenu() {
-            if (mobileDrawer.classList.contains('hidden')) {
-                mobileDrawer.classList.remove('hidden');
-                menuIcon.className = 'fa-solid fa-xmark text-lg';
-            } else {
-                mobileDrawer.classList.add('hidden');
-                menuIcon.className = 'fa-solid fa-bars text-lg';
-            }
-        }
-
-        // --- SECURITY IMPLEMENTATION (CLIENT-SIDE SANITIZATION) ---
-        
-        // Prevent brute force / spam calculation triggers
-        let calculationCooldown = false;
-
-        /**
-         * Sanitizes text strings to prevent HTML Injection, XSS payloads,
-         * and clean potential database query payloads (SQL injection mitigation).
-         */
+        // SANITIZATION HELPERS
         function cleanTextInput(str) {
-            if (typeof str !== 'string') return '';
-            
-            // Limit length
-            let cleaned = str.substring(0, 30);
-            
-            // Remove typical SQL commands / symbols to prevent client side exploits
-            cleaned = cleaned.replace(/SELECT|UNION|INSERT|DROP|DELETE|UPDATE|--/gi, '');
-            
-            // Remove common characters associated with script and database attacks
-            cleaned = cleaned.replace(/[<>'"/;`%()#&=]/g, '');
-            
-            return cleaned.trim();
+            return str.replace(/[^a-zA-Z0-9\s\-_]/g, '').trim();
         }
 
-        /**
-         * Safe number validation ensuring float/integer limits are respected.
-         */
-        function validateNumberInput(val, min, max, defaultValue) {
+        function cleanNumberInput(val, defaultVal = 0) {
             const parsed = parseFloat(val);
-            if (isNaN(parsed)) return defaultValue;
-            if (parsed < min) return min;
-            if (parsed > max) return max;
-            return parsed;
+            return isNaN(parsed) ? defaultVal : parsed;
         }
 
-        // PEARSON SQUARE CALCULATOR ENGINE (SECURED)
-        function calculatePearsonSquare() {
-            // Anti brute force click trigger (rate limiting)
-            if (calculationCooldown) {
-                showError("Aksi terlalu cepat! Harap tunggu 1 detik sebelum melakukan kalkulasi ulang.");
-                return;
-            }
-
-            // Set cooldown
-            calculationCooldown = true;
-            const btnCalc = document.getElementById('btn-calculate');
-            const btnCalcText = document.getElementById('btn-calc-text');
-            btnCalc.classList.add('opacity-50', 'cursor-not-allowed');
-            btnCalcText.textContent = "Sedang Memproses...";
-            
-            setTimeout(() => {
-                calculationCooldown = false;
-                btnCalc.classList.remove('opacity-50', 'cursor-not-allowed');
-                btnCalcText.textContent = "Hitung Proporsi Formulasi";
-            }, 1000); // 1-second delay / rate limiting
-
-            // Input Validation and Security Sanitize
-            const targetPk = validateNumberInput(document.getElementById('target-pk').value, 1, 99, 16);
-            const feedEnergyPk = validateNumberInput(document.getElementById('feed-energy-pk').value, 1, 99, 9);
-            const feedProteinPk = validateNumberInput(document.getElementById('feed-protein-pk').value, 1, 99, 44);
-            const batchWeight = validateNumberInput(document.getElementById('batch-weight').value, 1, 1000000, 1000);
-            
-            // Strict text cleaning to block XSS and characters common in injection
-            const nameA = cleanTextInput(document.getElementById('feed-a-name').value) || "Bahan A";
-            const nameB = cleanTextInput(document.getElementById('feed-b-name').value) || "Bahan B";
-
-            // Push sanitized inputs back to HTML fields
-            document.getElementById('target-pk').value = targetPk;
-            document.getElementById('feed-energy-pk').value = feedEnergyPk;
-            document.getElementById('feed-protein-pk').value = feedProteinPk;
-            document.getElementById('batch-weight').value = batchWeight;
-            document.getElementById('feed-a-name').value = nameA;
-            document.getElementById('feed-b-name').value = nameB;
-
-            const errorBanner = document.getElementById('calculator-error');
-            const resultDashboard = document.getElementById('calculator-result');
-
-            // High & Low checks for Pearson's Square to be mathematically possible
-            const maxInputPk = Math.max(feedEnergyPk, feedProteinPk);
-            const minInputPk = Math.min(feedEnergyPk, feedProteinPk);
-
-            if (targetPk <= minInputPk || targetPk >= maxInputPk) {
-                showError(`Nilai protein target (${targetPk}%) harus berada di antara kandungan protein terendah (${minInputPk}%) dan kandungan protein tertinggi (${maxInputPk}%)!`);
-                return;
-            }
-
-            // Clear Error
-            errorBanner.classList.add('hidden');
-
-            // Calculate parts
-            const partsOfA = Math.abs(feedProteinPk - targetPk);
-            const partsOfB = Math.abs(feedEnergyPk - targetPk);
-            const totalParts = partsOfA + partsOfB;
-
-            if (totalParts === 0) {
-                showError("Gagal menghitung! Jumlah protein kedua bahan pakan tidak boleh sama.");
-                return;
-            }
-
-            // Calculate percentages
-            const percentA = (partsOfA / totalParts) * 100;
-            const percentB = (partsOfB / totalParts) * 100;
-
-            // Calculate weight in Kg
-            const kgA = (percentA / 100) * batchWeight;
-            const kgB = (percentB / 100) * batchWeight;
-
-            // Render Output safely using textContent (Guards completely against XSS)
-            document.getElementById('res-name-a').textContent = nameA;
-            document.getElementById('res-name-b').textContent = nameB;
-
-            document.getElementById('res-percent-a').textContent = percentA.toFixed(2);
-            document.getElementById('res-percent-b').textContent = percentB.toFixed(2);
-
-            document.getElementById('res-kg-a').textContent = kgA.toFixed(1);
-            document.getElementById('res-kg-b').textContent = kgB.toFixed(1);
-
-            document.getElementById('res-target-pk').textContent = targetPk.toFixed(1);
-            document.getElementById('res-total-kg').textContent = batchWeight.toLocaleString('id-ID');
-
-            // Style visual Bar Safely
-            document.getElementById('bar-label-a').textContent = `${nameA}: ${percentA.toFixed(1)}%`;
-            document.getElementById('bar-label-b').textContent = `${nameB}: ${percentB.toFixed(1)}%`;
-
-            document.getElementById('bar-fill-a').style.width = `${percentA}%`;
-            document.getElementById('bar-fill-b').style.width = `${percentB}%`;
-
-            // Reveal results
-            resultDashboard.classList.remove('hidden');
-
-            // Smooth scroll to output
-            resultDashboard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-
-        function showError(message) {
-            const errorBanner = document.getElementById('calculator-error');
-            const errorMessage = document.getElementById('error-message');
-            const resultDashboard = document.getElementById('calculator-result');
-
-            // Using textContent to prevent rendering HTML error vectors
-            errorMessage.textContent = message;
-            errorBanner.classList.remove('hidden');
-            resultDashboard.classList.add('hidden');
-        }
-
-        function resetCalculator() {
-            document.getElementById('target-pk').value = 16;
-            document.getElementById('feed-energy-pk').value = 9;
-            document.getElementById('feed-protein-pk').value = 44;
-            document.getElementById('batch-weight').value = 1000;
-            document.getElementById('feed-a-name').value = "Jagung Kuning";
-            document.getElementById('feed-b-name').value = "Bungkil Kedelai";
-
-            document.getElementById('calculator-error').classList.add('hidden');
-            document.getElementById('calculator-result').classList.add('hidden');
-        }
-
-        // Action from Raw Material List to set parameters
-        function setAsFeedA(name, pkValue) {
-            const sanitizedName = cleanTextInput(name);
-            const sanitizedPk = validateNumberInput(pkValue, 1, 99, 9);
-            
-            document.getElementById('feed-a-name').value = sanitizedName;
-            document.getElementById('feed-energy-pk').value = sanitizedPk;
-            
-            const inputField = document.getElementById('feed-energy-pk').parentElement;
-            inputField.classList.add('border-primary-500', 'bg-primary-50/20');
-            setTimeout(() => {
-                inputField.classList.remove('border-primary-500', 'bg-primary-50/20');
-            }, 800);
-
-            document.getElementById('kalkulator').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function setAsFeedB(name, pkValue) {
-            const sanitizedName = cleanTextInput(name);
-            const sanitizedPk = validateNumberInput(pkValue, 1, 99, 44);
-
-            document.getElementById('feed-b-name').value = sanitizedName;
-            document.getElementById('feed-protein-pk').value = sanitizedPk;
-
-            const inputField = document.getElementById('feed-protein-pk').parentElement;
-            inputField.classList.add('border-amber-500', 'bg-amber-50/20');
-            setTimeout(() => {
-                inputField.classList.remove('border-amber-500', 'bg-amber-50/20');
-            }, 800);
-
-            document.getElementById('kalkulator').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // Preset Quick Loader
-        function loadPreset(target, feedA, feedB, animalType) {
-            const sanitizedTarget = validateNumberInput(target, 1, 99, 16);
-            const sanitizedFeedA = validateNumberInput(feedA, 1, 99, 9);
-            const sanitizedFeedB = validateNumberInput(feedB, 1, 99, 44);
-            const sanitizedAnimal = cleanTextInput(animalType);
-
-            document.getElementById('target-pk').value = sanitizedTarget;
-            document.getElementById('feed-energy-pk').value = sanitizedFeedA;
-            document.getElementById('feed-protein-pk').value = sanitizedFeedB;
-            
-            if(sanitizedAnimal.includes('Broiler') || sanitizedAnimal.includes('Layer')) {
-                document.getElementById('feed-a-name').value = "Jagung Kuning";
-                document.getElementById('feed-b-name').value = "Bungkil Kedelai";
+        // DARK MODE TOGGLE
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                icon.className = "fa-solid fa-moon";
             } else {
+                html.classList.add('dark');
+                icon.className = "fa-solid fa-sun";
+            }
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            if (menu.classList.contains('hidden')) {
+                menu.classList.remove('hidden');
+                icon.className = "fa-solid fa-xmark";
+            } else {
+                menu.classList.add('hidden');
+                icon.className = "fa-solid fa-bars";
+            }
+        }
+
+        // APPLY TEMPLATE
+        function applyTemplate(type) {
+            const sanitizedType = cleanTextInput(type);
+            if (sanitizedType === 'broiler') {
+                document.getElementById('target-protein').value = 21;
+                document.getElementById('feed-a-protein').value = 8.5; // Jagung Kuning
+                document.getElementById('feed-b-protein').value = 46.5; // SBM
+                document.getElementById('feed-a-name').value = "Jagung Kuning";
+                document.getElementById('feed-b-name').value = "Soybean Meal (SBM)";
+            } else if (sanitizedType === 'layer') {
+                document.getElementById('target-protein').value = 17;
+                document.getElementById('feed-a-protein').value = 14.5; // Bekatul / Dedak
+                document.getElementById('feed-b-protein').value = 38; // Konsentrat Petelur
+                document.getElementById('feed-a-name').value = "Dedak Halus";
+                document.getElementById('feed-b-name').value = "Konsentrat Ayam Petelur";
+            } else if (sanitizedType === 'cow') {
+                document.getElementById('target-protein').value = 14;
+                document.getElementById('feed-a-protein').value = 11; // Dedak & Pollard
+                document.getElementById('feed-b-protein').value = 25; // Bungkil Sawit / SBM
                 document.getElementById('feed-a-name').value = "Dedak & Pollard";
                 document.getElementById('feed-b-name').value = "Bungkil Sawit / SBM";
             }
@@ -1183,6 +465,121 @@
             if (activeBtn) {
                 activeBtn.className = "tab-btn shrink-0 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold bg-primary-600 text-white shadow-md transition-all";
             }
+        }
+
+        // PEARSON SQUARE CALCULATION
+        function calculatePearsonSquare() {
+            const target = cleanNumberInput(document.getElementById('target-protein').value, 0);
+            const totalWeight = cleanNumberInput(document.getElementById('total-weight').value, 0);
+
+            const nameA = cleanTextInput(document.getElementById('feed-a-name').value) || "Bahan 1";
+            const proteinA = cleanNumberInput(document.getElementById('feed-a-protein').value, 0);
+
+            const nameB = cleanTextInput(document.getElementById('feed-b-name').value) || "Bahan 2";
+            const proteinB = cleanNumberInput(document.getElementById('feed-b-protein').value, 0);
+
+            const resultStatus = document.getElementById('result-status');
+            const statusIcon = document.getElementById('status-icon');
+            const statusMessage = document.getElementById('status-message');
+
+            // VALIDATION
+            if (target <= 0 || proteinA <= 0 || proteinB <= 0 || totalWeight <= 0) {
+                showStatus("Nilai input harus lebih besar dari nol.", "error");
+                return;
+            }
+
+            if (proteinA >= proteinB) {
+                showStatus("Bahan 1 harus memiliki kadar protein lebih rendah dibanding Bahan 2.", "error");
+                return;
+            }
+
+            if (target <= proteinA || target >= proteinB) {
+                showStatus(`Target protein (${target}%) harus berada di antara protein Bahan 1 (${proteinA}%) dan Bahan 2 (${proteinB}%).`, "error");
+                return;
+            }
+
+            // Calculation
+            const partsA = Math.abs(proteinB - target);
+            const partsB = Math.abs(target - proteinA);
+            const totalParts = partsA + partsB;
+
+            const pctA = (partsA / totalParts) * 100;
+            const pctB = (partsB / totalParts) * 100;
+
+            const weightA = (pctA / 100) * totalWeight;
+            const weightB = (pctB / 100) * totalWeight;
+
+            // Render Results
+            document.getElementById('label-feed-a').textContent = nameA;
+            document.getElementById('pct-feed-a').textContent = `${pctA.toFixed(2)}%`;
+            document.getElementById('weight-feed-a').textContent = `(${weightA.toFixed(2)} kg)`;
+
+            document.getElementById('label-feed-b').textContent = nameB;
+            document.getElementById('pct-feed-b').textContent = `${pctB.toFixed(2)}%`;
+            document.getElementById('weight-feed-b').textContent = `(${weightB.toFixed(2)} kg)`;
+
+            // Render Math Steps
+            document.getElementById('math-step-1').innerHTML = `1. Bagian ${nameA} (selisih ${nameB} - Target) : |${proteinB}% - ${target}%| = <b>${partsA.toFixed(2)}</b> bagian`;
+            document.getElementById('math-step-2').innerHTML = `2. Bagian ${nameB} (selisih Target - ${nameA}) : |${target}% - ${proteinA}%| = <b>${partsB.toFixed(2)}</b> bagian`;
+            document.getElementById('math-step-3').innerHTML = `3. Total Bagian : ${partsA.toFixed(2)} + ${partsB.toFixed(2)} = <b>${totalParts.toFixed(2)}</b> bagian`;
+            document.getElementById('math-step-4').innerHTML = `4. Proporsi ${nameA} : (${partsA.toFixed(2)} / ${totalParts.toFixed(2)}) &times; 100% = <b>${pctA.toFixed(2)}%</b>`;
+            document.getElementById('math-step-5').innerHTML = `5. Proporsi ${nameB} : (${partsB.toFixed(2)} / ${totalParts.toFixed(2)}) &times; 100% = <b>${pctB.toFixed(2)}%</b>`;
+
+            showStatus("Formulasi berhasil dihitung dengan presisi!", "success");
+            updateChart(nameA, pctA, nameB, pctB);
+        }
+
+        function showStatus(message, type) {
+            const resultStatus = document.getElementById('result-status');
+            const statusIcon = document.getElementById('status-icon');
+            const statusMessage = document.getElementById('status-message');
+
+            resultStatus.classList.remove('hidden');
+
+            if (type === 'error') {
+                resultStatus.className = "rounded-2xl p-4 flex items-center gap-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/40 text-red-700 dark:text-red-300";
+                statusIcon.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
+                statusMessage.textContent = message;
+            } else {
+                resultStatus.className = "rounded-2xl p-4 flex items-center gap-3 bg-primary-50 dark:bg-primary-950/40 border border-primary-200 dark:border-primary-900/40 text-primary-700 dark:text-primary-300";
+                statusIcon.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
+                statusMessage.textContent = message;
+            }
+        }
+
+        // CHART MANAGEMENT
+        function updateChart(labelA, valueA, labelB, valueB) {
+            const ctx = document.getElementById('ratioChart').getContext('2d');
+            
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: [labelA, labelB],
+                    datasets: [{
+                        data: [valueA.toFixed(2), valueB.toFixed(2)],
+                        backgroundColor: ['#64748b', '#22c55e'],
+                        borderColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#ffffff',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    }
+                }
+            });
+        }
+
+        // INITIAL LOAD
+        window.onload = function() {
+            calculatePearsonSquare();
         }
     </script>
 </body>
